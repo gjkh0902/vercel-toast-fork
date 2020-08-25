@@ -1,0 +1,55 @@
+{
+  "name": "vercel-toast-fork",
+  "description": "Framework-agnostic vercel design's toast component",
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": "will",
+  "main": "dist/vercel-toast.min.js",
+  "module": "dist/vercel-toast.esm.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/*.ts",
+    "dist/*.js",
+    "dist/*.css"
+  ],
+  "scripts": {
+    "test": "echo lol",
+    "example": "poi --serve --config example/poi.config.js",
+    "example:build": "poi --prod --config example/poi.config.js",
+    "build": "node scripts/build.js && npm run gen-dts --scripts-prepend-node-path",
+    "gen-dts": "dts-bundle-generator src/index.ts -o dist/index.d.ts",
+    "docs": "typedoc src/index.ts --out example/public/docs --mode file --readme none --theme minimal --excludeNotExported",
+    "now-build": "npm run docs && npm run example:build",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@poi/plugin-typescript": "^12.3.1",
+    "@saika/github-corner": "^0.1.0",
+    "dts-bundle-generator": "^5.1.0",
+    "esbuild": "^0.6.13",
+    "husky": "^3.0.1",
+    "lint-staged": "^9.2.1",
+    "poi": "^12.8.0",
+    "postcss": "^7.0.32",
+    "postcss-preset-env": "^6.7.0",
+    "prettier": "^1.17.0",
+    "saika": "^2.12.3",
+    "typedoc": "^0.15.0",
+    "typescript": "^3.9.5",
+    "vue": "^2.6.10",
+    "vue-template-compiler": "^2.6.10",
+    "vuedown": "^3.1.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{ts,js,json,md}": [
+      "prettier --write",
+      "git add"
+    ]
+  }
+}
